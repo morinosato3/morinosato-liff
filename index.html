@@ -3,133 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>タブUI</title>
-
+<title>森の里三丁目 自治会 LIFF</title>
 <style>
-body {
+  body {
     margin: 0;
     padding: 0;
-    background-color: #000;
-    font-family: sans-serif;
-}
+    background: #000;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
 
-/* 画像をスマホ幅にフィット */
-.tab-image {
-    width: 100%;
-    height: auto;
-    display: none;
-}
-
-/* 表示中のタブだけ表示 */
-.active {
-    display: block;
-}
-
-/* 透明ボタン */
-.button-area {
-    position: absolute;
-    left: 0;
-    width: 100%;
-}
-
-/* タブ切り替えボタン */
-.tab-buttons {
-    display: flex;
-    width: 100%;
-}
-
-.tab-btn {
-    flex: 1;
-    padding: 12px;
-    text-align: center;
-    background: #ddd;
-    border: 1px solid #aaa;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.tab-btn.active {
-    background: #fff;
-    font-weight: bold;
-}
-
-/* 画像の上に透明ボタンを重ねるための枠 */
-.wrapper {
+  .wrapper {
     position: relative;
     width: 100%;
-}
-</style>
+    max-width: 500px; /* スマホ想定の最大幅（好みで調整可） */
+    margin: 0 auto;
+  }
 
+  .tab-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .hotspot {
+    position: absolute;
+    display: block;
+  }
+
+  .hotspot[href="#"] {
+    pointer-events: none; /* 未定リンクは押せないようにしておく */
+  }
+</style>
 </head>
 <body>
 
-<!-- タブ切り替え -->
-<div class="tab-buttons">
-    <div class="tab-btn active" onclick="showTab(1)">自治会館</div>
-    <div class="tab-btn" onclick="showTab(2)">自治会</div>
-</div>
+<div class="wrapper">
 
-<!-- タブ1 -->
-<div id="tab1" class="wrapper">
-    <img src="form3.jpg" class="tab-image active" id="img1">
+  <!-- タブ1：自治会館 -->
+  <div id="panel1" class="tab-panel active">
+    <img src="form3.jpg" id="img1" class="tab-image" alt="自治会館メニュー">
 
-    <!-- 透明ボタン（座標は画像の縮尺に合わせてJSで補正） -->
-    <a href="#" id="btn1_1" class="button-area"></a>
-    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/schedule/" id="btn1_2" class="button-area"></a>
-    <a href="#" id="btn1_3" class="button-area"></a>
-    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/%e3%82%88%e3%81%8f%e3%81%82%e3%82%8b-%e3%81%94%e8%b3%aa%e5%95%8f/" id="btn1_4" class="button-area"></a>
-</div>
+    <!-- タブ部分（上段 420px） -->
+    <!-- 左タブ：自治会館（タブ1を表示） -->
+    <a href="javascript:void(0)" id="t1_tabL" class="hotspot" onclick="showTab(1)"></a>
+    <!-- 右タブ：自治会（タブ2へ） -->
+    <a href="javascript:void(0)" id="t1_tabR" class="hotspot" onclick="showTab(2)"></a>
 
-<!-- タブ2 -->
-<div id="tab2" class="wrapper" style="display:none;">
-    <img src="form4.jpg" class="tab-image" id="img2">
+    <!-- 行1（高さ 633px） -->
+    <!-- 左：自治会館予約フォーム（未定） -->
+    <a href="#" id="t1_b1L" class="hotspot"></a>
+    <!-- 右：自治会館予定表 -->
+    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/schedule/" id="t1_b1R" class="hotspot"></a>
 
-    <a href="https://morinosato.net/jichiren/sarubbs/" id="btn2_1" class="button-area"></a>
-    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/" id="btn2_2" class="button-area"></a>
-    <a href="https://morinosato.net/jichiren/kemonobbs/" id="btn2_3" class="button-area"></a>
-    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/convenience-book/" id="btn2_4" class="button-area"></a>
+    <!-- 行2（高さ 633px） -->
+    <!-- 左：自治会館使用日誌フォーム（未定） -->
+    <a href="#" id="t1_b2L" class="hotspot"></a>
+    <!-- 右：よくあるご質問 -->
+    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/%e3%82%88%e3%81%8f%e3%81%82%e3%82%8b-%e3%81%94%e8%b3%aa%e5%95%8f/" id="t1_b2R" class="hotspot"></a>
+  </div>
+
+  <!-- タブ2：自治会情報 -->
+  <div id="panel2" class="tab-panel">
+    <img src="form4.jpg" id="img2" class="tab-image" alt="自治会情報メニュー">
+
+    <!-- タブ部分（上段 420px） -->
+    <!-- 左タブ：自治会館（タブ1へ） -->
+    <a href="javascript:void(0)" id="t2_tabL" class="hotspot" onclick="showTab(1)"></a>
+    <!-- 右タブ：自治会（タブ2を表示） -->
+    <a href="javascript:void(0)" id="t2_tabR" class="hotspot" onclick="showTab(2)"></a>
+
+    <!-- 行1（高さ 633px） -->
+    <!-- 左：サルの目撃情報 -->
+    <a href="https://morinosato.net/jichiren/sarubbs/" id="t2_b1L" class="hotspot"></a>
+    <!-- 右：森の里三丁目自治会ホームページ -->
+    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/" id="t2_b1R" class="hotspot"></a>
+
+    <!-- 行2（高さ 633px） -->
+    <!-- 左：野生動物の目撃情報 -->
+    <a href="https://morinosato.net/jichiren/kemonobbs/" id="t2_b2L" class="hotspot"></a>
+    <!-- 右：くらしの便利帳 -->
+    <a href="https://morinosato-jichi.sakura.ne.jp/3chome/convenience-book/" id="t2_b2R" class="hotspot"></a>
+  </div>
+
 </div>
 
 <script>
-// タブ切り替え
-function showTab(n) {
-    document.getElementById("tab1").style.display = (n === 1) ? "block" : "none";
-    document.getElementById("tab2").style.display = (n === 2) ? "block" : "none";
+  // 元画像サイズ
+  const NATURAL_W = 2500;
+  const TAB_H     = 420;
+  const ROW_H     = 633;
+  const LEFT_W    = 1650;
+  const RIGHT_W   = 850;
 
-    const btns = document.getElementsByClassName("tab-btn");
-    btns[0].classList.toggle("active", n === 1);
-    btns[1].classList.toggle("active", n === 2);
-}
+  function showTab(n) {
+    document.getElementById('panel1').classList.toggle('active', n === 1);
+    document.getElementById('panel2').classList.toggle('active', n === 2);
+    // タブ切り替え後も再計算（高さが変わる可能性に備えて）
+    setHotspots();
+  }
 
-// 透明ボタンの位置設定（縮尺対応）
-function setButtons() {
-    const img1 = document.getElementById("img1");
-    const img2 = document.getElementById("img2");
+  function setHotspots() {
+    const img1 = document.getElementById('img1');
+    const img2 = document.getElementById('img2');
 
-    const naturalHeight = 1686; // 元画像の高さ
-    const startY = 420;
-    const btnH = 624;
-
-    const scale1 = img1.clientHeight / naturalHeight;
-    const scale2 = img2.clientHeight / naturalHeight;
-
-    // タブ1
-    for (let i = 1; i <= 4; i++) {
-        const btn = document.getElementById("btn1_" + i);
-        btn.style.top = (startY + btnH * (i - 1)) * scale1 + "px";
-        btn.style.height = (btnH * scale1) + "px";
+    if (!img1.complete || !img2.complete) {
+      // 画像読み込み前なら後で再実行
+      setTimeout(setHotspots, 100);
+      return;
     }
 
-    // タブ2
-    for (let i = 1; i <= 4; i++) {
-        const btn = document.getElementById("btn2_" + i);
-        btn.style.top = (startY + btnH * (i - 1)) * scale2 + "px";
-        btn.style.height = (btnH * scale2) + "px";
-    }
-}
+    const w1 = img1.clientWidth;
+    const w2 = img2.clientWidth;
 
-window.onload = setButtons;
-window.onresize = setButtons;
+    const scale1 = w1 / NATURAL_W;
+    const scale2 = w2 / NATURAL_W;
+
+    // 共通：タブ行・行1・行2 の top
+    const tabTop   = 0;
+    const row1Top  = TAB_H;
+    const row2Top  = TAB_H + ROW_H;
+
+    // --- タブ1（form3.jpg） ---
+    setRect('t1_tabL',  tabTop, 0,        LEFT_W,  TAB_H,  scale1);
+    setRect('t1_tabR',  tabTop, LEFT_W,   RIGHT_W, TAB_H,  scale1);
+
+    setRect('t1_b1L',   row1Top, 0,        LEFT_W,  ROW_H, scale1);
+    setRect('t1_b1R',   row1Top, LEFT_W,   RIGHT_W, ROW_H, scale1);
+
+    setRect('t1_b2L',   row2Top, 0,        LEFT_W,  ROW_H, scale1);
+    setRect('t1_b2R',   row2Top, LEFT_W,   RIGHT_W, ROW_H, scale1);
+
+    // --- タブ2（form4.jpg） ---
+    setRect('t2_tabL',  tabTop, 0,        LEFT_W,  TAB_H,  scale2);
+    setRect('t2_tabR',  tabTop, LEFT_W,   RIGHT_W, TAB_H,  scale2);
+
+    setRect('t2_b1L',   row1Top, 0,        LEFT_W,  ROW_H, scale2);
+    setRect('t2_b1R',   row1Top, LEFT_W,   RIGHT_W, ROW_H, scale2);
+
+    setRect('t2_b2L',   row2Top, 0,        LEFT_W,  ROW_H, scale2);
+    setRect('t2_b2R',   row2Top, LEFT_W,   RIGHT_W, ROW_H, scale2);
+  }
+
+  function setRect(id, top, left, width, height, scale) {
+    const el = document.getElementById(id);
+    el.style.top    = (top    * scale) + 'px';
+    el.style.left   = (left   * scale) + 'px';
+    el.style.width  = (width  * scale) + 'px';
+    el.style.height = (height * scale) + 'px';
+  }
+
+  window.addEventListener('load', setHotspots);
+  window.addEventListener('resize', setHotspots);
 </script>
 
 </body>
